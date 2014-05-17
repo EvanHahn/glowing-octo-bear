@@ -1,0 +1,12 @@
+{
+  "name": "workin-on-my-shiiiiit",
+  "author": "Evan Hahn",
+  "private": true,
+  "version": "0.6.9",
+  "dependencies": {
+    "harp": "0.12.x"
+  },
+  "scripts": {
+    "start": "harp server --port 8000"
+  }
+}
