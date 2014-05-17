@@ -7,24 +7,24 @@ TWOPI = 2 * Math.PI
 class Droplet
 
   constructor: (@x, @y) ->
-    @direction = Math.random() * TWOPI
+    @direction = Math.sin(Math.random() * TWOPI)
     @speed = SPEED
-    @decel = DECEL
     @age = 0
+    @color = Spectra.random()
 
   tick: (dt) ->
 
     @age += dt
     @pool.leave() if @age >= MAX_AGE
 
-    @speed = Math.max(@speed - @decel, 0)
+    @speed = Math.max(@speed - DECEL, 0)
     @x += Math.cos(@direction) * (@speed * (dt / 1000))
     @y += Math.sin(@direction) * (@speed * (dt / 1000))
 
   draw: (ctx) ->
     return if @age >= MAX_AGE # this is a hack sorry
     scale = (MAX_AGE - @age) / MAX_AGE
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = @color.hex()
     ctx.beginPath()
     ctx.arc(@x, @y, MAX_RADIUS * scale, 0, TWOPI)
     ctx.fill()
