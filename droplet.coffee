@@ -6,12 +6,11 @@ TWOPI = 2 * Math.PI
 
 class Droplet
 
-  constructor: (@x, @y) ->
-    console.log "new droplet. #{@x}, #{@y}"
+  constructor: (colorIndex, @x, @y) ->
     @direction = Math.random() * TWOPI
     @speed = SPEED
     @age = 0
-    @color = Spectra.random()
+    @color = makeColor(colorIndex)
 
   tick: (dt) ->
 
@@ -31,17 +30,15 @@ class Droplet
     scale = (MAX_AGE - @age) / MAX_AGE
     radius = MAX_RADIUS * scale
 
-    if scale > 0.5
-      ctx.shadowBlur = radius * radius
-      ctx.shadowOffsetX = 0
-      ctx.shadowOffsetY = 0
-      ctx.shadowColor = @color.hex()
-    else
-      ctx.shadowBlur = 0
     ctx.fillStyle = @color.hex()
-
     ctx.beginPath()
     ctx.arc(@x, @y, radius, 0, TWOPI)
     ctx.fill()
+
+    ctx.strokeStyle = "#000000"
+    ctx.lineWidth = Math.floor(radius / 5)
+    ctx.beginPath()
+    ctx.arc(@x, @y, radius, 0, TWOPI)
+    ctx.stroke()
 
 @Droplet = Droplet
