@@ -22,8 +22,8 @@ $body.on "mouseup", ->
 
 new Ticker (dt) ->
 
-  context.fillStyle = backgroundColor
-  context.fillRect(0, 0, canvas.width, canvas.height)
+  $body.css("background-color", backgroundColor)
+  context.clearRect(0, 0, canvas.width, canvas.height)
 
   pool.each (swimmer) ->
     swimmer.tick(dt)
