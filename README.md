@@ -8,4 +8,6 @@ to run this:
     npm install
     npm start
 
+only works well in chrome, sorry
+
 pow
